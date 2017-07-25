@@ -53,6 +53,9 @@ public class TongueController : MonoBehaviour
         foreach (Transform t in DeadFlyParent)
         {
             Destroy(t.gameObject); // replace with pooling at some point
+                                   
+            // do other stuff - give score, energy or whatever
+            GameManager.Instance.ConsumeFly();
         }
 
         // turn off the collider
@@ -61,6 +64,6 @@ public class TongueController : MonoBehaviour
         // reactivate head movement
         _isFiring = false;
 
-        // do other stuff - give score, energy or whatever
+        
     }
 }
