@@ -80,8 +80,10 @@ public class TestMove : MonoBehaviour {
 	}
 
 	void Update () {
-		if (_state == PlayerState.Running){
+		if (_state == PlayerState.Running) {
 			Run ();
+		} else if (_state == PlayerState.Swimming) {
+			swimStrokeTimer -= Time.deltaTime;
 		}
 	} 
 		
@@ -152,7 +154,6 @@ public class TestMove : MonoBehaviour {
 	}
 
 	private void Swim () {
-		swimStrokeTimer -= Time.deltaTime;
 		if (swimStrokeTimer <= 0f) {
 			swimStrokeTimer = swimStrokeTime;
 			rb2d.AddForce (Vector2.right * swimForce, ForceMode2D.Impulse); // later, make this in the direction of aim.
