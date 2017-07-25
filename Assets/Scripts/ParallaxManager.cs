@@ -11,6 +11,8 @@ public class ParallaxManager : MonoBehaviour {
 
 	[SerializeField]
 	private TestMove playerMove;
+	[SerializeField]
+	private TestInput playerInput;
 
 	[SerializeField]
 	private ParallaxLayer[] layers;
@@ -29,9 +31,7 @@ public class ParallaxManager : MonoBehaviour {
 	[SerializeField]
 	private float yParallaxFactor;
 	[SerializeField]
-	private float xInputToParallax; // how much of player's move vector goes into parallax movement?
-	[SerializeField]
-	private float xInputSpeedFactor; // affects overall speed
+	private float xInputSpeedFactor; // how much does input affect speed?
 	[SerializeField]
 	private float xSpeed;
 	[SerializeField]
@@ -61,11 +61,16 @@ public class ParallaxManager : MonoBehaviour {
 
 	void Update () {
 
+		// track player y axis movement delta and apply it below as vertical parallax
 		yDelta = playerMove.transform.position.y - lastPlayerY;
 		lastPlayerY = playerMove.transform.position.y;
 
-		xSpeed += inputDir.x * xInputToParallax * xInputSpeedFactor * Time.deltaTime;
+		inputDir = playerInput.GetPlayerInputVector ();
 
+		// modify speed by input vector.
+		xSpeed += inputDir.x * xInputSpeedFactor * Time.deltaTime; 
+
+		// apply drag
 		if (xSpeed > 0f) {
 			xSpeed -= parallaxDrag * Time.deltaTime;
 		}
@@ -76,18 +81,24 @@ public class ParallaxManager : MonoBehaviour {
 			xSpeed = 0f;
 		}
 		for (int i = 0; i < layers.Length; i++) {
-			layers [i].XParallax (xSpeed * xInputToParallax);
+			layers [i].XParallax (xSpeed);
 			layers [i].YParallax (yDelta * yParallaxFactor);
 		}
 	}
-		
-	public Vector2 SetDir (Vector2 _dir) {
-		// this is the main input to the manager from the input class.
+
+	public void SetDir (Vector2 _dir) {
 		inputDir = _dir;
-		return new Vector2 (inputDir.x * (1 - xInputToParallax), inputDir.y);
 	}
 
 	public float GetLeftEdge(){
 		return xLeftBounds;
+	}
+
+	public void SetDrag (float _drag) {
+		parallaxDrag = _drag;
+	}
+
+	public void IncSpeed (float incBy) {
+		xSpeed += incBy;
 	}
 }
