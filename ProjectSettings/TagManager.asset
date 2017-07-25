@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fly
+  - Surface
+  - SuperSurface
+  - SubSurface
   layers:
   - Default
   - TransparentFX

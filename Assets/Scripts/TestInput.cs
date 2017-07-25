@@ -10,14 +10,16 @@ public class TestInput : MonoBehaviour {
 	private float xAxis;
 	private float yAxis;
 
+	private TestMove mover;
+
 	[SerializeField]
-	private ParallaxManager parallax;
+	private string buttonA = "space";
 
 	void Awake () {
 		dir = Vector2.zero;
+		mover = GetComponent<TestMove> ();
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		dir = Vector2.zero;
 		xAxis = Input.GetAxis ("Horizontal");
@@ -25,8 +27,13 @@ public class TestInput : MonoBehaviour {
 		if (xAxis != 0f || yAxis != 0f) {
 			dir = new Vector2 (xAxis, yAxis);
 		}
-		// part of the input is applied to parallax, the vector is modified, and the mover uses what's left.
-		dir = parallax.SetDir (dir);
+
+		if (Input.GetKeyDown (buttonA)) {
+			mover.ButtonA ();
+		}
 	}
 		
+	public Vector2 GetPlayerInputVector() {
+		return dir;
+	}
 }
