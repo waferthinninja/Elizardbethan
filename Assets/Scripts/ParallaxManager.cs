@@ -21,17 +21,13 @@ public class ParallaxManager : MonoBehaviour {
 	private float xLeftBounds;
 	[SerializeField]
 	private float xRightBounds;
-	[SerializeField]
-	private float yTopBounds;
-	[SerializeField]
-	private float yBottomBounds;
 
 	private float lastPlayerY;
 	private float yDelta = 0f;
 	[SerializeField]
 	private float yParallaxFactor;
 	[SerializeField]
-	private float xInputSpeedFactor; // how much does input affect speed?
+	private float xInputSpeedFactor;
 	[SerializeField]
 	private float xSpeed;
 	[SerializeField]
@@ -39,8 +35,6 @@ public class ParallaxManager : MonoBehaviour {
 
 	[SerializeField]
 	private float parallaxDrag;
-
-	private float yScreen = 10f;
 
 	private Vector2 inputDir;
 
