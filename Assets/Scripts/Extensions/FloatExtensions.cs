@@ -1,9 +1,15 @@
 ﻿public static class FloatExtensions
 {
-    public static void Clamp(this float f, float min, float max)
+    public static float Clamp(this float f, float min, float max)
     {
-        if (f < min) f = min;
-        if (f > max) f = max;
+        if (f < min)
+        {
+            return min;
+        }
+        if (f > max)
+        {
+            return max;
+        }
+        return f;
     }
-
 }

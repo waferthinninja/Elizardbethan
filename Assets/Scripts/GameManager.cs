@@ -62,9 +62,9 @@ public class GameManager : MonoBehaviour {
 
     public void ChangeHealth(float deltaHealth)
     {
-        CurrentHealth += deltaHealth;        
+        CurrentHealth += deltaHealth;
 
-        CurrentHealth.Clamp(0, MaxHealth);
+        CurrentHealth = CurrentHealth.Clamp(0, MaxHealth);
 
         if (OnHealthChange != null)
         {
