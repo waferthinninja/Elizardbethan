@@ -293,6 +293,30 @@ Prefab:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1568017866}
+    - target: {fileID: 1254958030974728, guid: d297f63d484cc4c56b7f79e15dd1bcab, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118741032232750, guid: d297f63d484cc4c56b7f79e15dd1bcab, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1689478861353830, guid: d297f63d484cc4c56b7f79e15dd1bcab, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323442331799512, guid: d297f63d484cc4c56b7f79e15dd1bcab, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416556579729810, guid: d297f63d484cc4c56b7f79e15dd1bcab, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1942723425006150, guid: d297f63d484cc4c56b7f79e15dd1bcab, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d297f63d484cc4c56b7f79e15dd1bcab, type: 2}
   m_IsPrefabParent: 0
