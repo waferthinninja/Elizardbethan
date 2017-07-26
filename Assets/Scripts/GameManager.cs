@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour {
     {
         CurrentHealth += deltaHealth;
 
-        CurrentHealth = CurrentHealth.Clamp(0, MaxHealth);
+        CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
 
         if (OnHealthChange != null)
         {

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ public class TestMove : MonoBehaviour {
 	private Rigidbody2D rb2d;
 	private CircleCollider2D col2d;
 	private TestInput myInput;
+
+    private HeadController head;
 
 	[SerializeField]
 	private PlayerState _state;
@@ -65,6 +68,7 @@ public class TestMove : MonoBehaviour {
 		rb2d = GetComponent<Rigidbody2D> ();
 		col2d = GetComponent<CircleCollider2D> ();
 		myInput = GetComponent<TestInput> ();
+	    head = GetComponentInChildren<HeadController>();
 	}
 
 	void Start () {
@@ -156,7 +160,11 @@ public class TestMove : MonoBehaviour {
 	private void Swim () {
 		if (swimStrokeTimer <= 0f) {
 			swimStrokeTimer = swimStrokeTime;
-			rb2d.AddForce (Vector2.right * swimForce, ForceMode2D.Impulse); // later, make this in the direction of aim.
+		    dir = new Vector2(Mathf.Cos(head.transform.eulerAngles.z*Mathf.Rad2Deg),
+		                      Mathf.Sin(head.transform.eulerAngles.z*Mathf.Rad2Deg));
+            dir.Normalize();
+            Debug.Log(dir);
+		    rb2d.AddForce(dir * swimForce, ForceMode2D.Impulse); 
 			parallax.IncSpeed (swimSpeed);
 		} 
 	}
