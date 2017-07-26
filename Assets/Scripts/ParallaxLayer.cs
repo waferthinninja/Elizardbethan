@@ -12,6 +12,8 @@ public class ParallaxLayer : MonoBehaviour {
 	private Sprite[] tileSprites;
 	private int spritePointer;
 
+	[SerializeField]
+	private TestSpawner spawner;
 
 	[SerializeField]
 	private float parallaxFactor; // affects size of tile and speed of movement
@@ -47,6 +49,10 @@ public class ParallaxLayer : MonoBehaviour {
 			if (tiles [i].transform.position.x < mgr.GetLeftEdge ()) {
 				tiles [i].transform.Translate (Vector2.right * numTiles * tileSize * parallaxFactor);
 				tiles [i].SwapTileSprite (NextSprite ());
+				tiles [i].DePopTile ();
+				if (spawner != null) {
+					spawner.SpawnOnTile (tiles [i]);
+				}
 			}
 		}
 	}

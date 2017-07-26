@@ -13,4 +13,13 @@ public class ParallaxTile : MonoBehaviour {
 	public void SwapTileSprite(Sprite sprite) {
 		rend.sprite = sprite;
 	}
+
+	public void DePopTile () {
+		if (transform.childCount >= 1) {
+			for (int i = 0; i < transform.childCount; i++) {
+				Transform toDestroy = transform.GetChild (i);
+				Destroy (toDestroy.gameObject, 0.1f);
+			}
+		}
+	} 
 }

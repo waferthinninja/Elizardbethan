@@ -588,6 +588,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 38f1cc0779dcb457f81cc3d9942ab4f3, type: 3}
   - {fileID: 21300000, guid: b31efdf6ef4464770a8aef68581875ea, type: 3}
   - {fileID: 21300000, guid: 0b98632e3946f4119bf98fe79a7652be, type: 3}
+  spawner: {fileID: 0}
   parallaxFactor: 0
 --- !u!114 &114088326417151556
 MonoBehaviour:
@@ -604,6 +605,7 @@ MonoBehaviour:
   tileFab: {fileID: 1529821206739456, guid: db71cff786bab42b8995270eb1217fee, type: 2}
   tileSprites:
   - {fileID: 21300000, guid: 33fa133d301df498f860661cc3728a81, type: 3}
+  spawner: {fileID: 0}
   parallaxFactor: 0
 --- !u!114 &114180528420972116
 MonoBehaviour:
@@ -655,6 +657,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a67ff959557a148be88bc3bfdc67a1fb, type: 3}
   - {fileID: 21300000, guid: b2d05b305ec0e4a1eab1ee436b1625a3, type: 3}
   - {fileID: 21300000, guid: f6d11af7b2af2493585a9d978f740c41, type: 3}
+  spawner: {fileID: 0}
   parallaxFactor: 0
 --- !u!114 &114546787738736376
 MonoBehaviour:
@@ -671,6 +674,7 @@ MonoBehaviour:
   tileFab: {fileID: 1529821206739456, guid: db71cff786bab42b8995270eb1217fee, type: 2}
   tileSprites:
   - {fileID: 21300000, guid: 33fa133d301df498f860661cc3728a81, type: 3}
+  spawner: {fileID: 0}
   parallaxFactor: 0
 --- !u!114 &114707929687331656
 MonoBehaviour:
@@ -708,6 +712,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 38f1cc0779dcb457f81cc3d9942ab4f3, type: 3}
   - {fileID: 21300000, guid: b31efdf6ef4464770a8aef68581875ea, type: 3}
   - {fileID: 21300000, guid: 0b98632e3946f4119bf98fe79a7652be, type: 3}
+  spawner: {fileID: 0}
   parallaxFactor: 0
 --- !u!114 &114740247730364706
 MonoBehaviour:
@@ -745,4 +750,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 38f1cc0779dcb457f81cc3d9942ab4f3, type: 3}
   - {fileID: 21300000, guid: b31efdf6ef4464770a8aef68581875ea, type: 3}
   - {fileID: 21300000, guid: 0b98632e3946f4119bf98fe79a7652be, type: 3}
+  spawner: {fileID: 0}
   parallaxFactor: 0
