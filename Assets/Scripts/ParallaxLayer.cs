@@ -15,25 +15,28 @@ public class ParallaxLayer : MonoBehaviour {
 
 	[SerializeField]
 	private float parallaxFactor; // affects size of tile and speed of movement
-	private int tileCount;
+	private int layerUnitSize;
+	private float tileSize;
+	private int numTiles;
 
 	private ParallaxManager mgr;
 
 	void Awake () {
-		mgr = GetComponentInParent<ParallaxManager> ();
-		parallaxFactor = transform.localScale.x; // tiles are assumed to be 1u wide.
-		// for now deal with oversize tiles by leaving blanks in the tileset, but not perfect!
 	}
 
 	public void SetUpLayer (float xSize) {
-
-		tileCount = (int)(xSize / parallaxFactor) + 1;
-		tiles = new ParallaxTile[tileCount];
+		mgr = GetComponentInParent<ParallaxManager> ();
+		parallaxFactor = transform.localScale.x;
+		layerUnitSize = (int)(xSize / parallaxFactor) + 1;
+		tileSize = tileSprites [0].bounds.max.x * 2;
+		numTiles = Mathf.RoundToInt (layerUnitSize / tileSize + 0.5f);
+		//Debug.Log (numTiles.ToString ());
+		tiles = new ParallaxTile[numTiles];
 		float leftEdge = 0 - (xSize / 2);
-		for (int i = 0; i < tileCount; i++) {
+		for (int i = 0; i < numTiles; i++) {
 			GameObject newTile = (GameObject)Instantiate (tileFab, this.transform);
 			tiles [i] = newTile.GetComponent<ParallaxTile> ();
-			tiles [i].transform.Translate (Vector2.right * (leftEdge + i * parallaxFactor));
+			tiles [i].transform.Translate (Vector2.right * (leftEdge + i * tileSize * parallaxFactor));
 			tiles [i].SwapTileSprite (NextSprite ());
 		}
 	}
@@ -42,7 +45,7 @@ public class ParallaxLayer : MonoBehaviour {
 		for (int i = 0; i < tiles.Length; i++) {
 			tiles [i].transform.Translate (Vector2.left * xMove * parallaxFactor);
 			if (tiles [i].transform.position.x < mgr.GetLeftEdge ()) {
-				tiles [i].transform.Translate (Vector2.right * tileCount * parallaxFactor);
+				tiles [i].transform.Translate (Vector2.right * numTiles * tileSize * parallaxFactor);
 				tiles [i].SwapTileSprite (NextSprite ());
 			}
 		}
