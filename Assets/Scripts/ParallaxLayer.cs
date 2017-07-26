@@ -32,7 +32,6 @@ public class ParallaxLayer : MonoBehaviour {
 		layerUnitSize = (int)(xSize / parallaxFactor) + 1;
 		tileSize = tileSprites [0].bounds.max.x * 2;
 		numTiles = Mathf.RoundToInt (layerUnitSize / tileSize + 0.5f);
-		//Debug.Log (numTiles.ToString ());
 		tiles = new ParallaxTile[numTiles];
 		float leftEdge = 0 - (xSize / 2);
 		for (int i = 0; i < numTiles; i++) {
