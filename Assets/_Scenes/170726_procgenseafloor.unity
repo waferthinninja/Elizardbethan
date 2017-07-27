@@ -206,6 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 201901857}
   - component: {fileID: 201901858}
+  - component: {fileID: 201901859}
   m_Layer: 0
   m_Name: Layer
   m_TagString: Untagged
@@ -239,12 +240,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tiles: []
   tileFab: {fileID: 1529821206739456, guid: db71cff786bab42b8995270eb1217fee, type: 2}
-  tileSprites:
-  - {fileID: 21300000, guid: d3ec42d10555d40da9e348161b00544c, type: 3}
-  - {fileID: 21300000, guid: 6f500443876844d3d861ee74a9d9b02b, type: 3}
-  - {fileID: 21300000, guid: 8a9ece4a4ac7b41e3b67cd9f0a705353, type: 3}
+  tileSet: {fileID: 201901859}
   spawner: {fileID: 0}
   parallaxFactor: 0
+--- !u!114 &201901859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 201901856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451ff9fca7aa04be18cf37a3d44441bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileSprites:
+  - {fileID: 21300000, guid: 0bf041173dda34969ae3585e4708824c, type: 3}
+  - {fileID: 21300000, guid: d38ec87747afc40f98d5314b1f987f62, type: 3}
 --- !u!1001 &543593297
 Prefab:
   m_ObjectHideFlags: 0
@@ -291,7 +303,7 @@ Prefab:
       objectReference: {fileID: 1600742329}
     - target: {fileID: 1626939579386796, guid: fd4d73c11424142b7a713ee58477caaa, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd4d73c11424142b7a713ee58477caaa, type: 2}
@@ -350,10 +362,6 @@ Prefab:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1568017866}
-    - target: {fileID: 1446220269702202, guid: d297f63d484cc4c56b7f79e15dd1bcab, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d297f63d484cc4c56b7f79e15dd1bcab, type: 2}
   m_IsPrefabParent: 0
@@ -516,6 +524,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1703580826933776, guid: ac5c77e4912cdb846a02292a090a2dc9, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac5c77e4912cdb846a02292a090a2dc9, type: 2}
   m_IsPrefabParent: 0
@@ -621,6 +633,10 @@ Prefab:
       propertyPath: TirednessRate
       value: -50
       objectReference: {fileID: 0}
+    - target: {fileID: 1908758373415782, guid: cf44ffa7ed5a9684e9e21b18db246d7c, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf44ffa7ed5a9684e9e21b18db246d7c, type: 2}
   m_IsPrefabParent: 0
@@ -657,7 +673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1852357686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,7 +724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2081365393
 MonoBehaviour:
   m_ObjectHideFlags: 0
