@@ -91,6 +91,13 @@ public class TestMove : MonoBehaviour {
 		if (_state == PlayerState.Running) {
 			Run ();
 		} else if (_state == PlayerState.Swimming) {
+
+            // hack to prevent swimming in air, probably a better way to handle
+            if (transform.position.y > 0)
+            {
+                Breach();
+            }
+
 			swimStrokeTimer -= Time.deltaTime;
 		}
 	} 
@@ -119,14 +126,14 @@ public class TestMove : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other) {
 		if (other.CompareTag ("SuperSurface")) {
-			if (_state == PlayerState.Jumping) {
+			if (_state == PlayerState.Jumping ) {
 				ChangeState(PlayerState.Running);
 				col2d.isTrigger = false;
 			} else if (_state == PlayerState.Breaching && rb2d.velocity.y <= 0f) {
 				ChangeState(PlayerState.Running);
 				parallax.SetDrag (dragInAir);
 				col2d.isTrigger = false;
-			}
+			} 
 		}
 
 		if (other.CompareTag ("SubSurface")) {
@@ -166,8 +173,7 @@ public class TestMove : MonoBehaviour {
 			swimStrokeTimer = swimStrokeTime;
 		    dir = new Vector2(Mathf.Cos(head.transform.eulerAngles.z*Mathf.Deg2Rad),
 		                      Mathf.Sin(head.transform.eulerAngles.z*Mathf.Deg2Rad));
-            dir.Normalize();
-            Debug.Log(dir);
+           // dir.Normalize();
 		    rb2d.AddForce(dir * swimForce, ForceMode2D.Impulse); 
 			parallax.IncSpeed (swimSpeed);
 		} 

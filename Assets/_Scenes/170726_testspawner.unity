@@ -240,11 +240,11 @@ Prefab:
         type: 2}
       propertyPath: parallax
       value: 
-      objectReference: {fileID: 1600742329}
+      objectReference: {fileID: 2016607910}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd4d73c11424142b7a713ee58477caaa, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &935367141
+--- !u!1001 &867538911
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -283,11 +283,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114295147149826566, guid: d297f63d484cc4c56b7f79e15dd1bcab,
-        type: 2}
-      propertyPath: spawner
-      value: 
-      objectReference: {fileID: 2081365393}
     - target: {fileID: 114180528420972116, guid: d297f63d484cc4c56b7f79e15dd1bcab,
         type: 2}
       propertyPath: playerMove
@@ -298,6 +293,11 @@ Prefab:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1568017866}
+    - target: {fileID: 114295147149826566, guid: d297f63d484cc4c56b7f79e15dd1bcab,
+        type: 2}
+      propertyPath: spawner
+      value: 
+      objectReference: {fileID: 2081365393}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d297f63d484cc4c56b7f79e15dd1bcab, type: 2}
   m_IsPrefabParent: 0
@@ -580,11 +580,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 543593297}
   m_Script: {fileID: 11500000, guid: 98a196292e1a145dc95417ca2465b2b9, type: 3}
---- !u!114 &1600742329 stripped
+--- !u!114 &2016607910 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114180528420972116, guid: d297f63d484cc4c56b7f79e15dd1bcab,
     type: 2}
-  m_PrefabInternal: {fileID: 935367141}
+  m_PrefabInternal: {fileID: 867538911}
   m_Script: {fileID: 11500000, guid: 08da67b5dac764e809e189bccc93be2f, type: 3}
 --- !u!1 &2081365392
 GameObject:
