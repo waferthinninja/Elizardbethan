@@ -52,6 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4278172431960596}
   - component: {fileID: 212647416453560146}
+  - component: {fileID: 114967409285169916}
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
@@ -422,6 +423,21 @@ MonoBehaviour:
   MinAngle: -45
   MaxAngle: 45
   RotationSpeed: 200
+--- !u!114 &114967409285169916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1270226096290458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ece30bdcd60844a9275dd750eb7261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetSprite: {fileID: 21300000, guid: de685a2763aea47d1a1d28c2ea292b49, type: 3}
+  ArrowSprite: {fileID: 21300000, guid: a2285eedeea08e44baa7d506b49d5a02, type: 3}
+  TargetColor: {r: 1, g: 0, b: 0, a: 1}
+  ArrowColor: {r: 0.75810987, g: 0.9044118, b: 0.8741424, a: 0.778}
 --- !u!212 &212089561744285470
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -622,12 +638,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0.70657736, b: 0.05925605, a: 1}
+  m_Sprite: {fileID: 21300000, guid: de685a2763aea47d1a1d28c2ea292b49, type: 3}
+  m_Color: {r: 0.35142735, g: 0.73119247, b: 0.684, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 1.96, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

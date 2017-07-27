@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TargetController : MonoBehaviour {
-
     
     public Sprite TargetSprite;
     public Sprite ArrowSprite;
@@ -12,31 +11,36 @@ public class TargetController : MonoBehaviour {
 
     private HeadController _headController;
     private SpriteRenderer _renderer;
+    private TestMove _mover;
 
     private bool _isTarget = true;
-
-	// Use this for initialization
-	void Start () {
+    
+	void Start ()
+    {
         _renderer = GetComponent<SpriteRenderer>();
         _headController = GetComponentInParent<HeadController>();
+        _mover = GetComponentInParent<TestMove>();
+        _mover.RegisterOnStateChange(OnStateChange);
         SetTargetSprite();
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         _renderer.enabled = !_headController.IsFiring;
+	}
 
-        // temp - prob want to Observe player state instead
-        if (transform.position.y >= 0 && !_isTarget)
+    public void OnStateChange()
+    {
+        PlayerState state = _mover.GetPlayerState();
+        if (state != PlayerState.Swimming && !_isTarget)
         {
             SetTargetSprite();
         }
-        else if (transform.position.y < 0 && _isTarget)
+        else if (state == PlayerState.Swimming && _isTarget)
         {
             SetArrowSprite();
         }
-
-	}
+    }
 
     public void SetTargetSprite()
     {
