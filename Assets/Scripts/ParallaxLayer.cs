@@ -9,36 +9,34 @@ public class ParallaxLayer : MonoBehaviour {
 	[SerializeField]
 	private GameObject tileFab;
 	[SerializeField]
-	private Sprite[] tileSprites;
-	private int spritePointer;
+	private ParallaxTileset tileSet;
 
 	[SerializeField]
 	private TestSpawner spawner;
 
 	[SerializeField]
-	private float parallaxFactor; // affects size of tile and speed of movement
+	private float parallaxFactor;
 	private int layerUnitSize;
 	private float tileSize;
 	private int numTiles;
 
 	private ParallaxManager mgr;
 
-	void Awake () {
-	}
-
 	public void SetUpLayer (float xSize) {
 		mgr = GetComponentInParent<ParallaxManager> ();
 		parallaxFactor = transform.localScale.x;
 		layerUnitSize = (int)(xSize / parallaxFactor) + 1;
-		tileSize = tileSprites [0].bounds.max.x * 2;
+		tileSize = tileSet.GetTileSize ();
 		numTiles = Mathf.RoundToInt (layerUnitSize / tileSize + 0.5f);
 		tiles = new ParallaxTile[numTiles];
 		float leftEdge = 0 - (xSize / 2);
 		for (int i = 0; i < numTiles; i++) {
 			GameObject newTile = (GameObject)Instantiate (tileFab, this.transform);
 			tiles [i] = newTile.GetComponent<ParallaxTile> ();
+			tiles [i].SetTileset (tileSet);
+			tiles [i].SwapTileSprite ();
 			tiles [i].transform.Translate (Vector2.right * (leftEdge + i * tileSize * parallaxFactor));
-			tiles [i].SwapTileSprite (NextSprite ());
+			// tiles also need to know their prevTile
 		}
 	}
 
@@ -47,7 +45,7 @@ public class ParallaxLayer : MonoBehaviour {
 			tiles [i].transform.Translate (Vector2.left * xMove * parallaxFactor);
 			if (tiles [i].transform.position.x < mgr.GetLeftEdge ()) {
 				tiles [i].transform.Translate (Vector2.right * numTiles * tileSize * parallaxFactor);
-				tiles [i].SwapTileSprite (NextSprite ());
+				tiles [i].SwapTileSprite ();
 				tiles [i].DePopTile ();
 				if (spawner != null) {
 					spawner.SpawnOnTile (tiles [i]);
@@ -60,9 +58,5 @@ public class ParallaxLayer : MonoBehaviour {
 		transform.Translate (Vector2.up * yMove * parallaxFactor);
 	}
 		
-	Sprite NextSprite () {
-		Sprite nextSprite = tileSprites [spritePointer];
-		spritePointer = (spritePointer + 1) % tileSprites.Length;
-		return nextSprite;
-	}
+
 }

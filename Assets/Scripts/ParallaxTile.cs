@@ -7,16 +7,21 @@ public class ParallaxTile : MonoBehaviour {
 	private SpriteRenderer rend;
 
 	private ParallaxTile prevTile;
-
+	[SerializeField]
 	public float yEntryPoint;
+	[SerializeField]
 	public float yExitPoint;
+
+	private ParallaxTileset tileSet;
+
+	private int spritePointer;
 
 	void Awake () {
 		rend = GetComponent<SpriteRenderer> ();
 	}
 
-	public void SwapTileSprite(Sprite sprite) {
-		rend.sprite = sprite;
+	public void SwapTileSprite() {
+		rend.sprite = NextSprite();
 	}
 
 	public void DePopTile () {
@@ -28,6 +33,10 @@ public class ParallaxTile : MonoBehaviour {
 		}
 	} 
 
+	public void SetTileset (ParallaxTileset _tileSet) {
+		tileSet = _tileSet;
+	}
+
 	public void SetPrevTile (ParallaxTile _prevTile){
 		prevTile = _prevTile;
 	}
@@ -35,10 +44,11 @@ public class ParallaxTile : MonoBehaviour {
 	public void SetYFromPrevTile () {
 		float lastY = transform.position.y;
 		float moveBy = prevTile.transform.position.y + prevTile.yExitPoint + yEntryPoint;
-
-		// continue extending this class, but reify the ramp tiles- instead of the parallax layer having an array of sprites, it has an array of prefabs. 
-		// possibly it has one prefab with an array of sprites and runs sequentially
-		// or more than one and follows direction / randomly
-		// but it's midnight and that's all folks!
+	}
+		
+	Sprite NextSprite () {
+		Sprite nextSprite = tileSet.GetSprite(spritePointer);
+		spritePointer = (spritePointer + 1) % tileSet.GetTileSetSize(); // if we are a sequential tileset, we need to look at prevTile for our sprite pointer!
+		return nextSprite;
 	}
 }
