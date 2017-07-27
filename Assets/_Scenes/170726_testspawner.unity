@@ -241,37 +241,6 @@ Prefab:
       propertyPath: parallax
       value: 
       objectReference: {fileID: 1600742329}
-    - target: {fileID: 212647416453560146, guid: fd4d73c11424142b7a713ee58477caaa,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: de685a2763aea47d1a1d28c2ea292b49,
-        type: 3}
-    - target: {fileID: 212647416453560146, guid: fd4d73c11424142b7a713ee58477caaa,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 1.96
-      objectReference: {fileID: 0}
-    - target: {fileID: 212647416453560146, guid: fd4d73c11424142b7a713ee58477caaa,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 0.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 212647416453560146, guid: fd4d73c11424142b7a713ee58477caaa,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 0.35142735
-      objectReference: {fileID: 0}
-    - target: {fileID: 212647416453560146, guid: fd4d73c11424142b7a713ee58477caaa,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 0.73119247
-      objectReference: {fileID: 0}
-    - target: {fileID: 212647416453560146, guid: fd4d73c11424142b7a713ee58477caaa,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 0.684
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd4d73c11424142b7a713ee58477caaa, type: 2}
   m_IsPrefabParent: 0
@@ -332,24 +301,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d297f63d484cc4c56b7f79e15dd1bcab, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &965964084 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1270226096290458, guid: fd4d73c11424142b7a713ee58477caaa,
-    type: 2}
-  m_PrefabInternal: {fileID: 543593297}
---- !u!114 &965964085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 965964084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91ece30bdcd60844a9275dd750eb7261, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TargetSprite: {fileID: 21300000, guid: de685a2763aea47d1a1d28c2ea292b49, type: 3}
-  ArrowSprite: {fileID: 21300000, guid: a2285eedeea08e44baa7d506b49d5a02, type: 3}
 --- !u!1 &1215366091
 GameObject:
   m_ObjectHideFlags: 0
