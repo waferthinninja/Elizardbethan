@@ -6,6 +6,7 @@ public class ParallaxTile : MonoBehaviour {
 
 	private SpriteRenderer rend;
 
+	[SerializeField]
 	private ParallaxTile prevTile;
 	[SerializeField]
 	public float yEntryPoint;
@@ -41,14 +42,22 @@ public class ParallaxTile : MonoBehaviour {
 		prevTile = _prevTile;
 	}
 
+	public int GetSpritePointer() {
+		return spritePointer;
+	}
+
 	public void SetYFromPrevTile () {
 		float lastY = transform.position.y;
 		float moveBy = prevTile.transform.position.y + prevTile.yExitPoint + yEntryPoint;
 	}
 		
 	Sprite NextSprite () {
+		spritePointer = (prevTile.GetSpritePointer () + 1) % tileSet.GetTileSetSize ();
 		Sprite nextSprite = tileSet.GetSprite(spritePointer);
-		spritePointer = (spritePointer + 1) % tileSet.GetTileSetSize(); // if we are a sequential tileset, we need to look at prevTile for our sprite pointer!
 		return nextSprite;
+	}
+
+	public void SetTileSprite (int spritePointer) {
+		rend.sprite = tileSet.GetSprite (spritePointer);
 	}
 }
