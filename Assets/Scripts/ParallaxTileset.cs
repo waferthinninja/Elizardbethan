@@ -2,24 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ParallaxTileset : MonoBehaviour {
 
 	[SerializeField]
-	private Sprite[] tileSprites;
+	private Sprite[] tileSprite;
+	[SerializeField]
+	private float[] yEntryPoint;
+	[SerializeField]
+	private float[] yExitPoint;
 
-	public Sprite GetSprite(int i) {
-		if (i >= 0 && i < tileSprites.Length) {
-			return tileSprites [i];
-		} else {
-			return null;
-		}
+
+	public Sprite GetTileSprite(int i) {
+		return tileSprite [i];
+	}
+
+	public float[] GetEntryExit (int i) {
+		float[] entryExit = new float[2];
+		entryExit[0] = yEntryPoint[i];
+		entryExit[1] = yExitPoint[i];
+		return entryExit;
 	}
 
 	public float GetTileSize () {
-		return tileSprites [0].bounds.max.x * 2;
+		return tileSprite[0].bounds.max.x * 2;
 	}
 
 	public int GetTileSetSize() {
-		return tileSprites.Length;
+		return tileSprite.Length;
 	}
 }

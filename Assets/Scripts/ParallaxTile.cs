@@ -9,9 +9,9 @@ public class ParallaxTile : MonoBehaviour {
 	[SerializeField]
 	private ParallaxTile prevTile;
 	[SerializeField]
-	public float yEntryPoint;
+	private float yEntryPoint; 
 	[SerializeField]
-	public float yExitPoint;
+	private float yExitPoint;
 
 	private ParallaxTileset tileSet;
 
@@ -25,7 +25,15 @@ public class ParallaxTile : MonoBehaviour {
 		rend.sprite = NextSprite();
 	}
 
-	public void DePopTile () {
+	public void DespawnRespawn() {
+		DePopTile ();
+		SwapTileSprite ();
+		float yDiff = prevTile.transform.position.y + prevTile.yExitPoint - transform.position.y - yEntryPoint;
+		Debug.Log (this.ToString () + " " + yDiff);
+		transform.Translate (Vector2.up * yDiff);
+	}
+
+	private void DePopTile () {
 		if (transform.childCount >= 1) {
 			for (int i = 0; i < transform.childCount; i++) {
 				Transform toDestroy = transform.GetChild (i);
@@ -45,19 +53,18 @@ public class ParallaxTile : MonoBehaviour {
 	public int GetSpritePointer() {
 		return spritePointer;
 	}
-
-	public void SetYFromPrevTile () {
-		float lastY = transform.position.y;
-		float moveBy = prevTile.transform.position.y + prevTile.yExitPoint + yEntryPoint;
-	}
 		
 	Sprite NextSprite () {
 		spritePointer = (prevTile.GetSpritePointer () + 1) % tileSet.GetTileSetSize ();
-		Sprite nextSprite = tileSet.GetSprite(spritePointer);
+		Sprite nextSprite = tileSet.GetTileSprite(spritePointer);
+		float[] entryExit = tileSet.GetEntryExit (spritePointer);
+		yEntryPoint = entryExit [0];
+		yExitPoint = entryExit [1];
 		return nextSprite;
 	}
 
 	public void SetTileSprite (int spritePointer) {
-		rend.sprite = tileSet.GetSprite (spritePointer);
+		rend.sprite = tileSet.GetTileSprite (spritePointer);
 	}
+
 }

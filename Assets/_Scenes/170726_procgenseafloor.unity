@@ -240,10 +240,10 @@ Prefab:
         type: 2}
       propertyPath: parallax
       value: 
-      objectReference: {fileID: 1600742329}
+      objectReference: {fileID: 1852357686}
     - target: {fileID: 1626939579386796, guid: fd4d73c11424142b7a713ee58477caaa, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd4d73c11424142b7a713ee58477caaa, type: 2}
@@ -255,6 +255,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114356425472636434, guid: d297f63d484cc4c56b7f79e15dd1bcab,
+        type: 2}
+      propertyPath: tileSetMembers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4519275185990996, guid: d297f63d484cc4c56b7f79e15dd1bcab, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -325,7 +330,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1215366092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,7 +475,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1703580826933776, guid: ac5c77e4912cdb846a02292a090a2dc9, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac5c77e4912cdb846a02292a090a2dc9, type: 2}
@@ -510,8 +515,7 @@ Transform:
 --- !u!114 &1378645641
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114356425472636434, guid: d297f63d484cc4c56b7f79e15dd1bcab,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1378645639}
   m_Enabled: 1
@@ -519,29 +523,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451ff9fca7aa04be18cf37a3d44441bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileSprites:
-  - {fileID: 21300000, guid: 0bf041173dda34969ae3585e4708824c, type: 3}
-  - {fileID: 21300000, guid: 19446528163cf4d0cb7874a5619e671e, type: 3}
-  - {fileID: 21300000, guid: d38ec87747afc40f98d5314b1f987f62, type: 3}
-  - {fileID: 21300000, guid: 65ad8db3ec88f43a798ac6215b27a3d8, type: 3}
-  - {fileID: 21300000, guid: a75864c1ae1e94bb49dccc8f76aa0606, type: 3}
-  - {fileID: 21300000, guid: dcf6942df374c4e3d9d98bf1e4bb4119, type: 3}
-  - {fileID: 21300000, guid: a0a961ce6893a4523a8cfa13380ceab0, type: 3}
-  - {fileID: 21300000, guid: eb482ced68fbb4dfe959b1e52bb2866e, type: 3}
-  - {fileID: 21300000, guid: fb4c867a0f4194097bac8561272c4151, type: 3}
-  - {fileID: 21300000, guid: 1a973fb5945864ab186472fb63f3e388, type: 3}
-  - {fileID: 21300000, guid: c2d7c524f2c1f4fea88d185a4dc4e837, type: 3}
-  - {fileID: 21300000, guid: 4a121bf85e53c413188ffcdccf70278e, type: 3}
-  - {fileID: 21300000, guid: d3f39909168a84d0dbd28ebc2bcda4fe, type: 3}
-  - {fileID: 21300000, guid: f5ac1b78cbef84837bcfdcb3348f0719, type: 3}
-  - {fileID: 21300000, guid: 2533a380675974848bbdd550dd9496d7, type: 3}
-  - {fileID: 21300000, guid: fe907f561e6db48afad888f97bc0a04f, type: 3}
-  - {fileID: 21300000, guid: 8ece97a86fe9643679b9f599ceafa728, type: 3}
-  - {fileID: 21300000, guid: dcbba7d597024432eaf597b383da95ba, type: 3}
-  - {fileID: 21300000, guid: 7eedb7f2742e34e55ad85fdf8ffd038d, type: 3}
-  - {fileID: 21300000, guid: 38f1cc0779dcb457f81cc3d9942ab4f3, type: 3}
-  - {fileID: 21300000, guid: b31efdf6ef4464770a8aef68581875ea, type: 3}
-  - {fileID: 21300000, guid: 0b98632e3946f4119bf98fe79a7652be, type: 3}
+  tileSprite:
+  - {fileID: 21300000, guid: d3ec42d10555d40da9e348161b00544c, type: 3}
+  - {fileID: 21300000, guid: 6f500443876844d3d861ee74a9d9b02b, type: 3}
+  - {fileID: 21300000, guid: 8a9ece4a4ac7b41e3b67cd9f0a705353, type: 3}
+  yEntryPoint:
+  - 0.225
+  - -0.225
+  - 0
+  yExitPoint:
+  - -0.225
+  - 0.225
+  - 0
 --- !u!114 &1378645642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,7 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiles: []
-  tileFab: {fileID: 1529821206739456, guid: db71cff786bab42b8995270eb1217fee, type: 2}
+  tileFab: {fileID: 1529821206739456, guid: fa6b1236050b34ea9a21cd6bc174965e, type: 2}
   tileSet: {fileID: 1378645641}
   spawner: {fileID: 0}
   parallaxFactor: 0
@@ -680,12 +673,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 543593297}
   m_Script: {fileID: 11500000, guid: 98a196292e1a145dc95417ca2465b2b9, type: 3}
---- !u!114 &1600742329 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114180528420972116, guid: d297f63d484cc4c56b7f79e15dd1bcab,
-    type: 2}
-  m_PrefabInternal: {fileID: 935367141}
-  m_Script: {fileID: 11500000, guid: 08da67b5dac764e809e189bccc93be2f, type: 3}
 --- !u!1 &1852357685
 GameObject:
   m_ObjectHideFlags: 0

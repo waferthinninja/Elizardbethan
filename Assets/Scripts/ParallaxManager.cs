@@ -74,6 +74,7 @@ public class ParallaxManager : MonoBehaviour {
 		if (xSpeed < 0) {
 			xSpeed = 0f;
 		}
+		// iterate thru parallax layers and move them.
 		for (int i = 0; i < layers.Length; i++) {
 			layers [i].XParallax (xSpeed);
 			layers [i].YParallax (yDelta * yParallaxFactor);

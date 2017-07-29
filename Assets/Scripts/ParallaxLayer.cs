@@ -23,6 +23,7 @@ public class ParallaxLayer : MonoBehaviour {
 	private ParallaxManager mgr;
 
 	public void SetUpLayer (float xSize) {
+		
 		mgr = GetComponentInParent<ParallaxManager> ();
 		parallaxFactor = transform.localScale.x;
 		layerUnitSize = (int)(xSize / parallaxFactor) + 1;
@@ -30,21 +31,25 @@ public class ParallaxLayer : MonoBehaviour {
 		numTiles = Mathf.RoundToInt (layerUnitSize / tileSize + 0.5f);
 		tiles = new ParallaxTile[numTiles];
 		float leftEdge = 0 - (xSize / 2);
+
 		for (int i = 0; i < numTiles; i++) {
+
 			GameObject newTile = (GameObject)Instantiate (tileFab, this.transform);
 			tiles [i] = newTile.GetComponent<ParallaxTile> ();
 			tiles [i].transform.Translate (Vector2.right * (leftEdge + i * tileSize * parallaxFactor));
+
 			if (i > 0) {
 				tiles [i].SetPrevTile (tiles [i - 1]);
 			} 
 		}
+
 		tiles [0].SetPrevTile (tiles [numTiles - 1]);
+
 		for (int i = 0; i < numTiles; i++) {
 			tiles [i].SetTileset (tileSet);
 			if (i == 0) {
 				tiles [i].SetTileSprite (0);
 			} else {
-
 				tiles [i].SwapTileSprite ();
 			}
 		}
@@ -53,10 +58,10 @@ public class ParallaxLayer : MonoBehaviour {
 	public void XParallax (float xMove) {
 		for (int i = 0; i < tiles.Length; i++) {
 			tiles [i].transform.Translate (Vector2.left * xMove * parallaxFactor);
+
 			if (tiles [i].transform.position.x < mgr.GetLeftEdge ()) {
 				tiles [i].transform.Translate (Vector2.right * numTiles * tileSize * parallaxFactor);
-				tiles [i].SwapTileSprite ();
-				tiles [i].DePopTile ();
+				tiles [i].DespawnRespawn ();
 				if (spawner != null) {
 					spawner.SpawnOnTile (tiles [i]);
 				}
