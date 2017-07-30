@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +18,13 @@ public class TestMove : MonoBehaviour {
 	private CircleCollider2D col2d;
 	private TestInput myInput;
 
-	[SerializeField]
+    private HeadController head;
+
+    public Action OnStateChange;
+    public void RegisterOnStateChange(Action action) { OnStateChange += action;  }
+    public void UnregisterOnStateChange(Action action) { OnStateChange -= action; }
+
+    [SerializeField]
 	private PlayerState _state;
 
 	[SerializeField]
@@ -65,6 +72,7 @@ public class TestMove : MonoBehaviour {
 		rb2d = GetComponent<Rigidbody2D> ();
 		col2d = GetComponent<CircleCollider2D> ();
 		myInput = GetComponent<TestInput> ();
+	    head = GetComponentInChildren<HeadController>();
 	}
 
 	void Start () {
@@ -83,6 +91,13 @@ public class TestMove : MonoBehaviour {
 		if (_state == PlayerState.Running) {
 			Run ();
 		} else if (_state == PlayerState.Swimming) {
+
+            // hack to prevent swimming in air, probably a better way to handle
+            if (transform.position.y > 0)
+            {
+                Breach();
+            }
+
 			swimStrokeTimer -= Time.deltaTime;
 		}
 	} 
@@ -99,10 +114,10 @@ public class TestMove : MonoBehaviour {
 
 	public void ButtonA () {
 		if (_state == PlayerState.Running) {
-			_state = PlayerState.Jumping;
+			ChangeState(PlayerState.Jumping);
 			Jump ();
 		} else if (_state == PlayerState.Jumping) {
-			_state = PlayerState.Diving;
+			ChangeState(PlayerState.Diving);
 			Dive ();
 		} else if (_state == PlayerState.Swimming) {
 			Swim ();
@@ -111,19 +126,19 @@ public class TestMove : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other) {
 		if (other.CompareTag ("SuperSurface")) {
-			if (_state == PlayerState.Jumping) {
-				_state = PlayerState.Running;
+			if (_state == PlayerState.Jumping ) {
+				ChangeState(PlayerState.Running);
 				col2d.isTrigger = false;
 			} else if (_state == PlayerState.Breaching && rb2d.velocity.y <= 0f) {
-				_state = PlayerState.Running;
+				ChangeState(PlayerState.Running);
 				parallax.SetDrag (dragInAir);
 				col2d.isTrigger = false;
-			}
+			} 
 		}
 
 		if (other.CompareTag ("SubSurface")) {
 			if (_state == PlayerState.Diving) {
-				_state = PlayerState.Swimming;
+				ChangeState(PlayerState.Swimming);
 				rb2d.gravityScale = buoyancy;
 				parallax.SetDrag (dragInWater);
 				swimStrokeTimer = 0f;
@@ -143,7 +158,7 @@ public class TestMove : MonoBehaviour {
 	}
 
 	private void Breach () {
-		_state = PlayerState.Breaching;
+		ChangeState(PlayerState.Breaching);
 		ApplyImpulseForce (Vector2.up * breachForce);
 		rb2d.gravityScale = gravity;
 	}
@@ -156,8 +171,26 @@ public class TestMove : MonoBehaviour {
 	private void Swim () {
 		if (swimStrokeTimer <= 0f) {
 			swimStrokeTimer = swimStrokeTime;
-			rb2d.AddForce (Vector2.right * swimForce, ForceMode2D.Impulse); // later, make this in the direction of aim.
+		    dir = new Vector2(Mathf.Cos(head.transform.eulerAngles.z*Mathf.Deg2Rad),
+		                      Mathf.Sin(head.transform.eulerAngles.z*Mathf.Deg2Rad));
+           // dir.Normalize();
+		    rb2d.AddForce(dir * swimForce, ForceMode2D.Impulse); 
 			parallax.IncSpeed (swimSpeed);
 		} 
 	}
+
+    public PlayerState GetPlayerState()
+    {
+        return _state;
+    }
+
+    private void ChangeState(PlayerState newState)
+    {
+        _state = newState;
+
+        if (OnStateChange != null)
+        {
+            OnStateChange();
+        }
+    }
 }
