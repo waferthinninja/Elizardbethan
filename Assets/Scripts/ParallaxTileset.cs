@@ -11,6 +11,8 @@ public class ParallaxTileset : MonoBehaviour {
 	private float[] yEntryPoint;
 	[SerializeField]
 	private float[] yExitPoint;
+	[SerializeField]
+	public bool yChanges = false;
 
 
 	public Sprite GetTileSprite(int i) {
