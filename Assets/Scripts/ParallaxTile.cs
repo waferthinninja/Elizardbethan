@@ -13,6 +13,9 @@ public class ParallaxTile : MonoBehaviour {
 	[SerializeField]
 	private float yExitPoint;
 
+	[SerializeField]
+	private bool yChanges = false;
+
 	private ParallaxTileset tileSet;
 
 	private int spritePointer;
@@ -22,14 +25,23 @@ public class ParallaxTile : MonoBehaviour {
 	}
 
 	public void SwapTileSprite() {
-		rend.sprite = NextSprite();
+		if (!yChanges) {
+			spritePointer = (prevTile.GetSpritePointer () + 1) % tileSet.GetTileSetSize ();
+		} else {
+			spritePointer = (int)Random.Range (0, tileSet.GetTileSetSize() - 1); // placeholder! 
+		}
+		// this is the line that gives us sequential bhv.
+		Sprite nextSprite = tileSet.GetTileSprite(spritePointer);
+		float[] entryExit = tileSet.GetEntryExit (spritePointer);
+		yEntryPoint = entryExit [0];
+		yExitPoint = entryExit [1];
+		rend.sprite = nextSprite; 
 	}
 
 	public void DespawnRespawn() {
-		DePopTile ();
-		SwapTileSprite ();
+		DePopTile (); 
+		SwapTileSprite (); 
 		float yDiff = prevTile.transform.position.y + prevTile.yExitPoint - transform.position.y - yEntryPoint;
-		Debug.Log (this.ToString () + " " + yDiff);
 		transform.Translate (Vector2.up * yDiff);
 	}
 
@@ -53,18 +65,8 @@ public class ParallaxTile : MonoBehaviour {
 	public int GetSpritePointer() {
 		return spritePointer;
 	}
-		
-	Sprite NextSprite () {
-		spritePointer = (prevTile.GetSpritePointer () + 1) % tileSet.GetTileSetSize ();
-		Sprite nextSprite = tileSet.GetTileSprite(spritePointer);
-		float[] entryExit = tileSet.GetEntryExit (spritePointer);
-		yEntryPoint = entryExit [0];
-		yExitPoint = entryExit [1];
-		return nextSprite;
-	}
 
 	public void SetTileSprite (int spritePointer) {
 		rend.sprite = tileSet.GetTileSprite (spritePointer);
 	}
-
 }

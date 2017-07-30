@@ -241,6 +241,11 @@ Prefab:
       propertyPath: parallax
       value: 
       objectReference: {fileID: 1600742329}
+    - target: {fileID: 114681821333239664, guid: fd4d73c11424142b7a713ee58477caaa,
+        type: 2}
+      propertyPath: runSpeed
+      value: 0.18
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd4d73c11424142b7a713ee58477caaa, type: 2}
   m_IsPrefabParent: 0
@@ -298,6 +303,11 @@ Prefab:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1568017866}
+    - target: {fileID: 114180528420972116, guid: d297f63d484cc4c56b7f79e15dd1bcab,
+        type: 2}
+      propertyPath: xMaxSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d297f63d484cc4c56b7f79e15dd1bcab, type: 2}
   m_IsPrefabParent: 0
