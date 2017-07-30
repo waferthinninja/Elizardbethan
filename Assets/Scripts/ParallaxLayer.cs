@@ -9,47 +9,59 @@ public class ParallaxLayer : MonoBehaviour {
 	[SerializeField]
 	private GameObject tileFab;
 	[SerializeField]
-	private Sprite[] tileSprites;
-	private int spritePointer;
+	private ParallaxTileset tileSet;
 
 	[SerializeField]
 	private TestSpawner spawner;
 
 	[SerializeField]
-	private float parallaxFactor; // affects size of tile and speed of movement
+	private float parallaxFactor;
 	private int layerUnitSize;
 	private float tileSize;
 	private int numTiles;
 
 	private ParallaxManager mgr;
 
-	void Awake () {
-	}
-
 	public void SetUpLayer (float xSize) {
+		
 		mgr = GetComponentInParent<ParallaxManager> ();
 		parallaxFactor = transform.localScale.x;
 		layerUnitSize = (int)(xSize / parallaxFactor) + 1;
-		tileSize = tileSprites [0].bounds.max.x * 2;
+		tileSize = tileSet.GetTileSize ();
 		numTiles = Mathf.RoundToInt (layerUnitSize / tileSize + 0.5f);
-		//Debug.Log (numTiles.ToString ());
 		tiles = new ParallaxTile[numTiles];
 		float leftEdge = 0 - (xSize / 2);
+
 		for (int i = 0; i < numTiles; i++) {
+
 			GameObject newTile = (GameObject)Instantiate (tileFab, this.transform);
 			tiles [i] = newTile.GetComponent<ParallaxTile> ();
 			tiles [i].transform.Translate (Vector2.right * (leftEdge + i * tileSize * parallaxFactor));
-			tiles [i].SwapTileSprite (NextSprite ());
+
+			if (i > 0) {
+				tiles [i].SetPrevTile (tiles [i - 1]);
+			} 
+		}
+
+		tiles [0].SetPrevTile (tiles [numTiles - 1]);
+
+		for (int i = 0; i < numTiles; i++) {
+			tiles [i].SetTileset (tileSet);
+			if (i == 0) {
+				tiles [i].SetTileSprite (0);
+			} else {
+				tiles [i].SwapTileSprite ();
+			}
 		}
 	}
 
 	public void XParallax (float xMove) {
 		for (int i = 0; i < tiles.Length; i++) {
 			tiles [i].transform.Translate (Vector2.left * xMove * parallaxFactor);
+
 			if (tiles [i].transform.position.x < mgr.GetLeftEdge ()) {
 				tiles [i].transform.Translate (Vector2.right * numTiles * tileSize * parallaxFactor);
-				tiles [i].SwapTileSprite (NextSprite ());
-				tiles [i].DePopTile ();
+				tiles [i].DespawnRespawn ();
 				if (spawner != null) {
 					spawner.SpawnOnTile (tiles [i]);
 				}
@@ -61,9 +73,5 @@ public class ParallaxLayer : MonoBehaviour {
 		transform.Translate (Vector2.up * yMove * parallaxFactor);
 	}
 		
-	Sprite NextSprite () {
-		Sprite nextSprite = tileSprites [spritePointer];
-		spritePointer = (spritePointer + 1) % tileSprites.Length;
-		return nextSprite;
-	}
+
 }
