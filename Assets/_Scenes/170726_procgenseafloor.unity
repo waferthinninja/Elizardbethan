@@ -535,6 +535,7 @@ MonoBehaviour:
   - -0.225
   - 0.225
   - 0
+  yChanges: 1
 --- !u!114 &1378645642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,7 +709,7 @@ MonoBehaviour:
   yParallaxFactor: -0.8
   xInputSpeedFactor: 0.1
   xSpeed: 0
-  xMaxSpeed: 1.75
+  xMaxSpeed: 1
   parallaxDrag: 0.175
 --- !u!4 &1852357687
 Transform:
