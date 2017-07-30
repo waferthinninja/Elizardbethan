@@ -1,0 +1,29 @@
+<data>
+	<easy>
+		<patterns>		
+			<pattern>
+				<spawn><distance>1</distance><object>fly</object><ypos>1</ypos><parent>WaterSurface</parent>
+        <spawn><distance>2</distance><object>fly</object><ypos>1</ypos><parent>WaterSurface</parent>
+        <spawn><distance>3</distance><object>fly</object><ypos>1</ypos><parent>WaterSurface</parent>
+				</spawn>
+			</pattern>
+		</patterns>
+	</easy>
+	<medium>
+		<patterns>
+      <pattern>
+        <spawn><distance>1</distance><object>fly</object><ypos>1</ypos><parent>WaterSurface</parent>
+        <spawn><distance>2</distance><object>fly</object><ypos>1</ypos><parent>WaterSurface</parent>
+        </spawn>
+      </pattern>    
+		</patterns>
+	</medium>
+	<hard>
+		<patterns>
+      <pattern>
+        <spawn><distance>1</distance><object>fly</object><ypos>1</ypos><parent>WaterSurface</parent>
+        </spawn>
+      </pattern>
+		</patterns>
+	</hard>
+</data>
