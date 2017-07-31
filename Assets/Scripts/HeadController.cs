@@ -40,11 +40,13 @@ public class HeadController : MonoBehaviour
                 angle = Mathf.Clamp(angle, MinAngle, MaxAngle);
                 transform.rotation = Quaternion.Euler(0, 0, angle);
             }
+
+            if (Input.GetButton("Fire1"))
+            {
+                ShootTongue();
+            }
         }
-        if (Input.GetButton("Fire1"))
-        {
-            ShootTongue();
-        }
+        
         if (Input.GetKeyDown("m"))
         {
             _mouseAiming = !_mouseAiming;
