@@ -6,6 +6,14 @@ public struct SpawnEvent {
 
     float Distance;
     string ObjectName;
-    int yPosition;
+    float YPosition;
     string Parent;
+
+    public SpawnEvent(float distance, string objectName, float yPosition, string parent)
+    {
+        Distance = distance;
+        ObjectName = objectName;
+        YPosition = yPosition;
+        Parent = parent;
+    }
 }
