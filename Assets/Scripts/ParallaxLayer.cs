@@ -37,7 +37,7 @@ public class ParallaxLayer : MonoBehaviour {
 			GameObject newTile = (GameObject)Instantiate (tileFab, this.transform);
 			tiles [i] = newTile.GetComponent<ParallaxTile> ();
 			tiles [i].transform.Translate (Vector2.right * (leftEdge + i * tileSize * parallaxFactor));
-
+            
 			if (i > 0) {
 				tiles [i].SetPrevTile (tiles [i - 1]);
 			} 
