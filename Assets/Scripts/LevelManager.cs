@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System.Xml;
 using Assets.Scripts.Util;
+using System;
 
 public class LevelManager : MonoBehaviour
 {
@@ -24,6 +25,12 @@ public class LevelManager : MonoBehaviour
 
     public TextAsset patternDataFile;
 
+    public int PoolSize = 50; // prob want to make this large enough that the player is unlikely to ever need new levels
+                            // note this is not really effectively pooling since we are going to "new" patterns etc even if we reuse the level
+                            // but moot if getting to this sort of level is virtually impossible
+    public Level[] LevelPool;
+    private int _levelIndex = 0;
+
 	void Start () 
     {
         XmlDocument xml = new XmlDocument();
@@ -35,6 +42,28 @@ public class LevelManager : MonoBehaviour
         Debug.Log(EasyPatterns.Count + " easy patterns loaded");
         Debug.Log(MediumPatterns.Count + " medium patterns loaded");
         Debug.Log(HardPatterns.Count + " hard patterns loaded");
+
+        PopulateLevelPool();
+    }
+
+    public Level GetLevel(int levelNumber)
+    {
+        int i = (levelNumber - 1) % PoolSize;
+        if (LevelPool[i].LevelNumber != levelNumber)
+        {
+            LevelPool[i] = GenerateLevel(levelNumber);
+        }
+        return LevelPool[i];
+    }
+
+    private void PopulateLevelPool()
+    {
+        LevelPool = new Level[PoolSize];
+        for (int i = 1; i <= PoolSize; i++)
+        {
+            Debug.Log("Pregenerating level " + i);
+            LevelPool[i-1] = GenerateLevel(i);
+        }
     }
 
     void LoadPatternsFromXml(XmlDocument xml, string sectionName, ref List<Pattern> list)
@@ -72,10 +101,17 @@ public class LevelManager : MonoBehaviour
     }
 
 	public Level GenerateLevel(int levelNumber)
-	{
+    {
         Level level = new Level();
+        level.LevelNumber = levelNumber;
+        AddPatterns(levelNumber, level);
 
-	    int length = 4 + levelNumber / 2;
+        return level;
+    }
+    
+    private void AddPatterns(int levelNumber, Level level)
+    {
+        int length = 4 + levelNumber / 2;
         int easyCount = Mathf.Max(4 - levelNumber / 2, 0);
         int hardCount = Mathf.Max((levelNumber - 6) / 2, 0);
         int mediumCount = length - (easyCount + hardCount);
@@ -84,15 +120,13 @@ public class LevelManager : MonoBehaviour
         AddPatterns(level, easyCount, ref EasyPatterns);
         AddPatterns(level, mediumCount, ref MediumPatterns);
         AddPatterns(level, hardCount, ref HardPatterns);
-
-	    return level;
-	}
+    }
 
     private void AddPatterns(Level level, int count, ref List<Pattern> patterns)
     {
         for (int i = 0; i < count; i++)
         {
-            int id = Random.Range(0, patterns.Count - 1);
+            int id = UnityEngine.Random.Range(0, patterns.Count - 1);
             Pattern pattern = Util.DeepCopy<Pattern>(patterns[id]);                        
             level.Patterns.Enqueue(pattern);
         }
