@@ -171,8 +171,8 @@ public class TestMove : MonoBehaviour {
 	private void Swim () {
 		if (swimStrokeTimer <= 0f) {
 			swimStrokeTimer = swimStrokeTime;
-		    dir = new Vector2(Mathf.Cos(head.transform.eulerAngles.z*Mathf.Deg2Rad),
-		                      Mathf.Sin(head.transform.eulerAngles.z*Mathf.Deg2Rad));
+		    dir = new Vector2(Mathf.Cos(head.transform.eulerAngles.x*Mathf.Deg2Rad),
+		                      Mathf.Sin(head.transform.eulerAngles.x*Mathf.Deg2Rad));
            // dir.Normalize();
 		    rb2d.AddForce(dir * swimForce, ForceMode2D.Impulse); 
 			parallax.IncSpeed (swimSpeed);

@@ -81,6 +81,11 @@ public class ParallaxManager : MonoBehaviour {
 		}
 	}
 
+    public float GetXSpeed()
+    {
+        return xSpeed;
+    }
+
 	public void SetDir (Vector2 _dir) {
 		inputDir = _dir;
 	}
@@ -88,6 +93,11 @@ public class ParallaxManager : MonoBehaviour {
 	public float GetLeftEdge(){
 		return xLeftBounds;
 	}
+
+    public float GetRightEdge()
+    {
+        return xRightBounds;
+    }
 
 	public void SetDrag (float _drag) {
 		parallaxDrag = _drag;

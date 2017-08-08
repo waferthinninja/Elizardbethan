@@ -1,0 +1,153 @@
+fileFormatVersion: 2
+guid: a413ed1dff547bf428a1a3e6eb235c29
+timeCreated: 1501967587
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Armature|Body
+    100004: Armature|Chest
+    100006: Armature|Fingers.L
+    100008: Armature|Fingers.R
+    100010: Armature|Foot.L
+    100012: Armature|Foot.R
+    100014: Armature|Forearm.L
+    100016: Armature|Forearm.R
+    100018: Armature|Hand.L
+    100020: Armature|Hand.R
+    100022: Armature|HeadBottom
+    100024: Armature|HeadTop
+    100026: Armature|Jaw
+    100028: Armature|Leg.L
+    100030: Armature|Leg.R
+    100032: Armature|Neck
+    100034: Armature|Shin.L
+    100036: Armature|Shin.R
+    100038: Armature|Shoulder.L
+    100040: Armature|Shoulder.R
+    100042: Armature|Tail1
+    100044: Armature|Tail2
+    100046: Armature|Tail3
+    100048: Armature|Tail4
+    100050: Armature|Tail5
+    100052: Armature|Tail6
+    100054: Armature|Tail7
+    100056: Armature|Tail8
+    100058: Armature|Toes.L
+    100060: Armature|Toes.R
+    100062: Armature|Waist
+    100064: Cube
+    100066: //RootNode
+    400000: Armature
+    400002: Armature|Body
+    400004: Armature|Chest
+    400006: Armature|Fingers.L
+    400008: Armature|Fingers.R
+    400010: Armature|Foot.L
+    400012: Armature|Foot.R
+    400014: Armature|Forearm.L
+    400016: Armature|Forearm.R
+    400018: Armature|Hand.L
+    400020: Armature|Hand.R
+    400022: Armature|HeadBottom
+    400024: Armature|HeadTop
+    400026: Armature|Jaw
+    400028: Armature|Leg.L
+    400030: Armature|Leg.R
+    400032: Armature|Neck
+    400034: Armature|Shin.L
+    400036: Armature|Shin.R
+    400038: Armature|Shoulder.L
+    400040: Armature|Shoulder.R
+    400042: Armature|Tail1
+    400044: Armature|Tail2
+    400046: Armature|Tail3
+    400048: Armature|Tail4
+    400050: Armature|Tail5
+    400052: Armature|Tail6
+    400054: Armature|Tail7
+    400056: Armature|Tail8
+    400058: Armature|Toes.L
+    400060: Armature|Toes.R
+    400062: Armature|Waist
+    400064: Cube
+    400066: //RootNode
+    4300000: Cube
+    9500000: //RootNode
+    13700000: Cube
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
