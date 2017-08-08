@@ -3,9 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Xml;
+using Assets.Scripts.Util;
 
 public class LevelManager : MonoBehaviour
 {
+    private static LevelManager instance;
+    public static LevelManager Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = FindObjectOfType<LevelManager>();
+            return instance;
+        }
+    }
+
     private List<Pattern> EasyPatterns;
     private List<Pattern> MediumPatterns;
     private List<Pattern> HardPatterns;
@@ -20,9 +32,9 @@ public class LevelManager : MonoBehaviour
         LoadPatternsFromXml(xml, "medium", ref MediumPatterns);
         LoadPatternsFromXml(xml, "hard", ref HardPatterns);
 
-        Debug.Log(EasyPatterns.Count);
-        Debug.Log(MediumPatterns.Count);
-        Debug.Log(HardPatterns.Count);
+        Debug.Log(EasyPatterns.Count + " easy patterns loaded");
+        Debug.Log(MediumPatterns.Count + " medium patterns loaded");
+        Debug.Log(HardPatterns.Count + " hard patterns loaded");
     }
 
     void LoadPatternsFromXml(XmlDocument xml, string sectionName, ref List<Pattern> list)
@@ -32,7 +44,10 @@ public class LevelManager : MonoBehaviour
         foreach (XmlNode patternNode in section)
         {
             Pattern pattern = new Pattern();
-            pattern.SpawnEvents = new List<SpawnEvent>();
+
+            pattern.Length = float.Parse( patternNode.SelectSingleNode("length").InnerText);
+
+            var spawnEvents = new List<SpawnEvent>();
             var spawns = patternNode.SelectNodes("spawn");
             foreach (XmlNode spawnNode in spawns)
             {
@@ -40,12 +55,22 @@ public class LevelManager : MonoBehaviour
                     spawnNode.SelectSingleNode("object").InnerText,
                     float.Parse(spawnNode.SelectSingleNode("ypos").InnerText),
                     spawnNode.SelectSingleNode("parent").InnerText);
-                pattern.SpawnEvents.Add(spawn);
+                spawnEvents.Add(spawn);
             }
+
+            // sort the list before applying to the pattern as a queue 
+            spawnEvents.Sort(CompareByDistance);
+            pattern.SpawnEvents = new Queue<SpawnEvent>(spawnEvents);
+
             list.Add(pattern);
         }
     }
 	
+    private static int CompareByDistance(SpawnEvent e1, SpawnEvent e2)
+    {
+        return e1.Distance.CompareTo(e2.Distance);
+    }
+
 	public Level GenerateLevel(int levelNumber)
 	{
         Level level = new Level();
@@ -55,7 +80,7 @@ public class LevelManager : MonoBehaviour
         int hardCount = Mathf.Max((levelNumber - 6) / 2, 0);
         int mediumCount = length - (easyCount + hardCount);
 
-        level.Patterns = new List<Pattern>(length);
+        level.Patterns = new Queue<Pattern>(length);
         AddPatterns(level, easyCount, ref EasyPatterns);
         AddPatterns(level, mediumCount, ref MediumPatterns);
         AddPatterns(level, hardCount, ref HardPatterns);
@@ -68,7 +93,8 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             int id = Random.Range(0, patterns.Count - 1);
-            level.Patterns.Add(patterns[id]);
+            Pattern pattern = Util.DeepCopy<Pattern>(patterns[id]);                        
+            level.Patterns.Enqueue(pattern);
         }
     }
 }

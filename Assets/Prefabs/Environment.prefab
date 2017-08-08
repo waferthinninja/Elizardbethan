@@ -747,12 +747,12 @@ MonoBehaviour:
   - {fileID: 114829982705882762}
   - {fileID: 114209970660969664}
   - {fileID: 114160733627870140}
-  xLeftBounds: -10
-  xRightBounds: 10
+  xLeftBounds: -20
+  xRightBounds: 20
   yParallaxFactor: -0.8
   xInputSpeedFactor: 0.1
   xSpeed: 0.40816158
-  xMaxSpeed: 1
+  xMaxSpeed: 0.2
   parallaxDrag: 0.15
 --- !u!114 &114814988749547404
 MonoBehaviour:

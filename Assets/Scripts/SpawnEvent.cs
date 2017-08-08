@@ -1,13 +1,14 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public struct SpawnEvent {
 
-    float Distance;
-    string ObjectName;
-    float YPosition;
-    string Parent;
+    public float Distance;
+    public string ObjectName;
+    public float YPosition;
+    public string Parent;
 
     public SpawnEvent(float distance, string objectName, float yPosition, string parent)
     {

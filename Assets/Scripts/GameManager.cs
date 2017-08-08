@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour {
     void Start ()
     {
         CurrentHealth = MaxHealth;
+
 	}
 	
 	// Update is called once per frame

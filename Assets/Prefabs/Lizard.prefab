@@ -1422,8 +1422,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e83cdf7ebe7c04aa04b675cd574282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeadFlyParent: {fileID: 0}
-  TongueCollider: {fileID: 0}
+  DeadFlyParent: {fileID: 4140132068601310}
+  TongueCollider: {fileID: 70362428866623274}
   MinAngle: -60
   MaxAngle: 60
   RotationSpeed: 200
@@ -1441,18 +1441,18 @@ MonoBehaviour:
   _state: 0
   dir: {x: 0, y: 0}
   parallax: {fileID: 0}
-  jumpForce: 10
-  diveForce: 15
-  breachForce: 12
+  jumpForce: 5
+  diveForce: 6
+  breachForce: 8
   equilibriumFactor: 600
   xHome: -4
   gravity: 1
-  buoyancy: -0.1
-  dragInAir: 0.1
+  buoyancy: -0.2
+  dragInAir: 0.15
   dragInWater: 0.3
-  runSpeed: 0
-  moveRightForce: 0
-  moveRightBias: 0
+  runSpeed: 0.2
+  moveRightForce: 100
+  moveRightBias: 0.15
   swimForce: 10
   swimSpeed: 0.25
   swimStrokeTime: 0.1

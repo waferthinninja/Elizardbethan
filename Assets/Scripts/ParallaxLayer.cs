@@ -62,9 +62,9 @@ public class ParallaxLayer : MonoBehaviour {
 			if (tiles [i].transform.position.x < mgr.GetLeftEdge ()) {
 				tiles [i].transform.Translate (Vector2.right * numTiles * tileSize * parallaxFactor);
 				tiles [i].DespawnRespawn ();
-				if (spawner != null) {
-					spawner.SpawnOnTile (tiles [i]);
-				}
+				//if (spawner != null) {
+				//	spawner.SpawnOnTile (tiles [i]);
+				//}
 			}
 		}
 	}
@@ -73,5 +73,9 @@ public class ParallaxLayer : MonoBehaviour {
 		transform.Translate (Vector2.up * yMove * parallaxFactor);
 	}
 		
+    public GameObject GetLastTile()
+    {
+        return tiles[tiles.Length - 1].gameObject;
+    }
 
 }
