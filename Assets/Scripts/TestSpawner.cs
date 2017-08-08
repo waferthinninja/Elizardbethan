@@ -28,7 +28,7 @@ public class TestSpawner : MonoBehaviour
     {        
         _levelNumber++;
         Debug.Log("Starting level " + _levelNumber);
-        _level = LevelManager.Instance.GenerateLevel(_levelNumber);
+        _level = LevelManager.Instance.GetLevel(_levelNumber);
         StartNextPattern();
     }
 
@@ -75,7 +75,7 @@ public class TestSpawner : MonoBehaviour
 
     private void DoSpawnEvent(SpawnEvent spawnEvent)
     {
-        Debug.Log("Spawning " + spawnEvent.ObjectName);
+      //  Debug.Log("Spawning " + spawnEvent.ObjectName);
         Transform t = Instantiate(_prefabs[spawnEvent.ObjectName]);
         ParallaxLayer pl = GameObject.Find(spawnEvent.Parent).GetComponent<ParallaxLayer>();
         t.SetParent(pl.GetLastTile().transform);
