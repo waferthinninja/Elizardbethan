@@ -8,6 +8,7 @@ TagManager:
   - Surface
   - SuperSurface
   - SubSurface
+  - Obstacle
   layers:
   - Default
   - TransparentFX

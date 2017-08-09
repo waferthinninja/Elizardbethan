@@ -641,12 +641,12 @@ Prefab:
     - target: {fileID: 114916535723114346, guid: f489d300ccd9fa3489f6199166ac30f3,
         type: 2}
       propertyPath: jumpForce
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114916535723114346, guid: f489d300ccd9fa3489f6199166ac30f3,
         type: 2}
       propertyPath: diveForce
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114916535723114346, guid: f489d300ccd9fa3489f6199166ac30f3,
         type: 2}
@@ -661,7 +661,7 @@ Prefab:
     - target: {fileID: 114916535723114346, guid: f489d300ccd9fa3489f6199166ac30f3,
         type: 2}
       propertyPath: dragInAir
-      value: 0.15
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 114916535723114346, guid: f489d300ccd9fa3489f6199166ac30f3,
         type: 2}
@@ -677,6 +677,16 @@ Prefab:
         type: 2}
       propertyPath: moveRightBias
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114916535723114346, guid: f489d300ccd9fa3489f6199166ac30f3,
+        type: 2}
+      propertyPath: dragInWater
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114916535723114346, guid: f489d300ccd9fa3489f6199166ac30f3,
+        type: 2}
+      propertyPath: obstacleForce
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f489d300ccd9fa3489f6199166ac30f3, type: 2}
@@ -869,6 +879,8 @@ MonoBehaviour:
   Prefabs:
   - ObjectName: Fly
     Prefab: {fileID: 4280987720928602, guid: 12124ea74f2e27743b2c3cfc918f3557, type: 2}
+  - ObjectName: LilyPad
+    Prefab: {fileID: 4895148616643720, guid: b124dbcd4d4140749882f3348fe08cb9, type: 2}
 --- !u!4 &2081365394
 Transform:
   m_ObjectHideFlags: 0

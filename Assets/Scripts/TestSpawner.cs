@@ -27,7 +27,7 @@ public class TestSpawner : MonoBehaviour
     private void StartNextLevel()
     {        
         _levelNumber++;
-        Debug.Log("Starting level " + _levelNumber);
+        //Debug.Log("Starting level " + _levelNumber);
         _level = LevelManager.Instance.GetLevel(_levelNumber);
         StartNextPattern();
     }
@@ -36,7 +36,7 @@ public class TestSpawner : MonoBehaviour
     {
         _pattern = _level.Patterns.Dequeue();
 
-        Debug.Log("Starting Pattern of length " + _pattern.Length + " with " + _pattern.SpawnEvents.Count + " events");
+        //Debug.Log("Starting Pattern of length " + _pattern.Length + " with " + _pattern.SpawnEvents.Count + " events");
     }
 
     
@@ -79,7 +79,7 @@ public class TestSpawner : MonoBehaviour
         Transform t = Instantiate(_prefabs[spawnEvent.ObjectName]);
         ParallaxLayer pl = GameObject.Find(spawnEvent.Parent).GetComponent<ParallaxLayer>();
         t.SetParent(pl.GetLastTile().transform);
-        t.position = new Vector3(ParallaxManager.GetRightEdge(), spawnEvent.YPosition);
+        t.position = new Vector3(ParallaxManager.GetRightEdge(), spawnEvent.YPosition + t.parent.position.y);
     }
 
     private void PopulateDictionaries()
@@ -90,13 +90,5 @@ public class TestSpawner : MonoBehaviour
             _prefabs[Prefabs[i].ObjectName] = Prefabs[i].Prefab;
         }
     }
-
- //   public void SpawnOnTile(ParallaxTile tile) {
-	//	tileCount++;
-	//	if (tileCount >= spawnEveryXTiles) {
-	//		tileCount = 0;
-	//		Instantiate (spawningPrefabs [spawnIndex], tile.transform); // the real spawner should use pooling.
-	//		spawnIndex = (spawnIndex + 1) % spawningPrefabs.Length;
-	//	}
-	//}
+    
 }

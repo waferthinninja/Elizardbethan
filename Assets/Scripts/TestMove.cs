@@ -68,7 +68,11 @@ public class TestMove : MonoBehaviour {
 	private float swimStrokeTime = 0.2f;
 	private float swimStrokeTimer;
 
-	void Awake () {
+    [SerializeField]
+    private float obstacleForce = 100f;
+
+
+    void Awake () {
 		rb2d = GetComponent<Rigidbody2D> ();
 		col2d = GetComponent<CircleCollider2D> ();
 		myInput = GetComponent<TestInput> ();
@@ -146,6 +150,10 @@ public class TestMove : MonoBehaviour {
 				Breach ();
 			}
 		}
+
+        if (other.CompareTag ("Obstacle")) {
+            ApplyImpulseForce(Vector2.left * obstacleForce);
+        }
 	}
 
 	private void Jump () {
