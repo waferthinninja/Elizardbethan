@@ -13,17 +13,6 @@ public class TestSpawner : MonoBehaviour
 
     public ParallaxManager ParallaxManager;
 
-    // hack using structs to populate dictionary in inspector
-    // this dictionary is so we can map a name in our pattern data e.g. "Fly" to its corresponding prefab
-    public StringToPrefabMapping[] Prefabs;
-    Dictionary<string, Transform> _prefabs;
-    
-
-    void Start()
-    {
-        PopulateDictionaries();
-    }
-
     private void StartNextLevel()
     {        
         _levelNumber++;
@@ -76,19 +65,11 @@ public class TestSpawner : MonoBehaviour
     private void DoSpawnEvent(SpawnEvent spawnEvent)
     {
       //  Debug.Log("Spawning " + spawnEvent.ObjectName);
-        Transform t = Instantiate(_prefabs[spawnEvent.ObjectName]);
+        Transform t = ObjectFactory.Instance.Instantiate(spawnEvent.ObjectName);
         ParallaxLayer pl = GameObject.Find(spawnEvent.Parent).GetComponent<ParallaxLayer>();
         t.SetParent(pl.GetLastTile().transform);
         t.position = new Vector3(ParallaxManager.GetRightEdge(), spawnEvent.YPosition + t.parent.position.y);
     }
 
-    private void PopulateDictionaries()
-    {
-        _prefabs = new Dictionary<string, Transform>();
-        for (int i = 0; i < Prefabs.Length; i++)
-        {
-            _prefabs[Prefabs[i].ObjectName] = Prefabs[i].Prefab;
-        }
-    }
     
 }

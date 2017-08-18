@@ -41,7 +41,6 @@ public class PatternEditor : MonoBehaviour {
             if (!Ignored.Contains(t))
             {
                 Debug.Log("Adding object " + t.name);
-                SpawnEvent se = new SpawnEvent(t.position.x, t.name, t.position.y, parent.name);
                 XmlElement spawnNode = (XmlElement)patternNode.AppendChild(xml.CreateElement("spawn"));
                 spawnNode.AppendChild(xml.CreateElement("distance")).InnerText = AdjustForBounds(t.position.x).ToString();
                 spawnNode.AppendChild(xml.CreateElement("object")).InnerText = StripDuplicatePart(t.name);
