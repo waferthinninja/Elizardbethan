@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Xml;
+using UnityEditor;
 
 [RequireComponent(typeof(PatternLoader))]
 public class PatternEditor : MonoBehaviour {
@@ -18,6 +19,11 @@ public class PatternEditor : MonoBehaviour {
 
     private PatternLoader _patternLoader;
     
+    public void SelectFile()
+    {
+        string path = EditorUtility.OpenFilePanel("Select file to load","","xml");
+        FilePath = path;
+    }
 
     public void LoadFromSpecifiedFilePath()
     {

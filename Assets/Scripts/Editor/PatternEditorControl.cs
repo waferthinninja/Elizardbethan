@@ -13,6 +13,10 @@ public class PatternEditorControl : Editor {
 
         PatternEditor editor = (PatternEditor)target;
         
+        if (GUILayout.Button("Select file"))
+        {
+            editor.SelectFile();
+        }
         if (GUILayout.Button("Load From Specified FilePath"))
         {
             editor.LoadFromSpecifiedFilePath();
