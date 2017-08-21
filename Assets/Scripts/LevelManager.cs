@@ -6,6 +6,7 @@ using System.Xml;
 using Assets.Scripts.Util;
 using System;
 
+[RequireComponent(typeof(PatternLoader))]
 public class LevelManager : MonoBehaviour
 {
     private static LevelManager instance;
@@ -27,10 +28,14 @@ public class LevelManager : MonoBehaviour
                             // note this is not really effectively pooling since we are going to "new" patterns etc even if we reuse the level
                             // but moot if getting to this sort of level is virtually impossible
     public Level[] LevelPool;
-    private int _levelIndex = 0;
+    //private int _levelIndex = 0;
+
+    private PatternLoader _patternLoader;
 
 	void Start () 
     {
+        _patternLoader = GetComponent<PatternLoader>();
+
         LoadPatterns("easy", ref EasyPatterns);
         LoadPatterns("medium", ref MediumPatterns);
         LoadPatterns("hard", ref HardPatterns);
@@ -72,42 +77,10 @@ public class LevelManager : MonoBehaviour
         foreach (string file in files)
         {
             if (file.EndsWith(".xml"))
-                list.Add(LoadPatternFromFile(file));
+                list.Add(_patternLoader.LoadPatternFromFile(file));
         }        
     }
 
-    private Pattern LoadPatternFromFile(string file)
-    {
-        Debug.Log("Loading pattern from file " + file);
-        var pattern = new Pattern();
-        var xml = new XmlDocument();
-        xml.LoadXml(File.ReadAllText(file));
-
-        var patternNode = xml.SelectSingleNode("pattern");
-        pattern.Length = float.Parse(patternNode.SelectSingleNode("length").InnerText);
-
-        var spawnEvents = new List<SpawnEvent>();
-        var spawns = patternNode.SelectNodes("spawn");
-        foreach (XmlNode spawnNode in spawns)
-        {
-            SpawnEvent spawn = new SpawnEvent(float.Parse(spawnNode.SelectSingleNode("distance").InnerText),
-                spawnNode.SelectSingleNode("object").InnerText,
-                float.Parse(spawnNode.SelectSingleNode("ypos").InnerText),
-                spawnNode.SelectSingleNode("parent").InnerText);
-            spawnEvents.Add(spawn);
-        }
-
-        // sort the list before applying to the pattern as a queue 
-        spawnEvents.Sort(CompareByDistance);
-        pattern.SpawnEvents = new Queue<SpawnEvent>(spawnEvents);   
-
-        return pattern;
-    }
-
-    private static int CompareByDistance(SpawnEvent e1, SpawnEvent e2)
-    {
-        return e1.Distance.CompareTo(e2.Distance);
-    }
 
 	public Level GenerateLevel(int levelNumber)
     {

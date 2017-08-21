@@ -10,8 +10,7 @@ public class TestSpawner : MonoBehaviour
     private Pattern _pattern;
 
     private float _distance; // distance through the current pattern
-
-    public ParallaxManager ParallaxManager;
+    
 
     private void StartNextLevel()
     {        
@@ -31,7 +30,7 @@ public class TestSpawner : MonoBehaviour
     
     void Update()
     {
-        _distance += ParallaxManager.GetXSpeed();
+        _distance += ParallaxManager.Instance.GetXSpeed();
         if ( _level == null //_level.Equals(default(Level)) 
             || (_distance > _pattern.Length && _level.Patterns.Count == 0))
         {
@@ -68,7 +67,7 @@ public class TestSpawner : MonoBehaviour
         Transform t = ObjectFactory.Instance.Instantiate(spawnEvent.ObjectName);
         ParallaxLayer pl = GameObject.Find(spawnEvent.Parent).GetComponent<ParallaxLayer>();
         t.SetParent(pl.GetLastTile().transform);
-        t.position = new Vector3(ParallaxManager.GetRightEdge(), spawnEvent.YPosition + t.parent.position.y);
+        t.position = new Vector3(ParallaxManager.Instance.GetRightEdge(), spawnEvent.YPosition + t.parent.position.y);
     }
 
     

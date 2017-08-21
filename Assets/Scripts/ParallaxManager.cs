@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class ParallaxManager : MonoBehaviour {
 
-	// a class to manage all our parallax layers.
-	// takes player input as a vector and determines
-	// how much of that vector is parallax movement, and how much is 
-	// player character movement.
+    private static ParallaxManager instance;
+    public static ParallaxManager Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = FindObjectOfType<ParallaxManager>();
+            return instance;
+        }
+    }
 
-	[SerializeField]
+    // a class to manage all our parallax layers.
+    // takes player input as a vector and determines
+    // how much of that vector is parallax movement, and how much is 
+    // player character movement.
+
+    [SerializeField]
 	private TestMove playerMove;
 	[SerializeField]
 	private TestInput playerInput;

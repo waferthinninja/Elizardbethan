@@ -27,6 +27,12 @@ public class ObjectFactory : MonoBehaviour {
 
     public Transform Instantiate(string name)
     {
+        // hmm hack to load dictionary in editor
+        if (_prefabs == null)
+        {
+            PopulateDictionaries();
+        }
+
         return Instantiate(_prefabs[name]);        
     }
 
