@@ -1,0 +1,7 @@
+<pattern>
+  <length>30</length>
+	<spawn><distance>1</distance><object>Fly</object><ypos>1</ypos><parent>WaterSurface</parent></spawn>
+  <spawn><distance>4</distance><object>Fly</object><ypos>2</ypos><parent>WaterSurface</parent></spawn>
+  <spawn><distance>3</distance><object>Fly</object><ypos>3</ypos><parent>WaterSurface</parent></spawn>
+  <spawn><distance>13</distance><object>LilyPad</object><ypos>0</ypos><parent>WaterSurface</parent></spawn>
+</pattern>

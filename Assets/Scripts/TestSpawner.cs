@@ -10,19 +10,7 @@ public class TestSpawner : MonoBehaviour
     private Pattern _pattern;
 
     private float _distance; // distance through the current pattern
-
-    public ParallaxManager ParallaxManager;
-
-    // hack using structs to populate dictionary in inspector
-    // this dictionary is so we can map a name in our pattern data e.g. "Fly" to its corresponding prefab
-    public StringToPrefabMapping[] Prefabs;
-    Dictionary<string, Transform> _prefabs;
     
-
-    void Start()
-    {
-        PopulateDictionaries();
-    }
 
     private void StartNextLevel()
     {        
@@ -42,7 +30,7 @@ public class TestSpawner : MonoBehaviour
     
     void Update()
     {
-        _distance += ParallaxManager.GetXSpeed();
+        _distance += ParallaxManager.Instance.GetXSpeed();
         if ( _level == null //_level.Equals(default(Level)) 
             || (_distance > _pattern.Length && _level.Patterns.Count == 0))
         {
@@ -76,19 +64,11 @@ public class TestSpawner : MonoBehaviour
     private void DoSpawnEvent(SpawnEvent spawnEvent)
     {
       //  Debug.Log("Spawning " + spawnEvent.ObjectName);
-        Transform t = Instantiate(_prefabs[spawnEvent.ObjectName]);
+        Transform t = ObjectFactory.Instance.Instantiate(spawnEvent.ObjectName);
         ParallaxLayer pl = GameObject.Find(spawnEvent.Parent).GetComponent<ParallaxLayer>();
         t.SetParent(pl.GetLastTile().transform);
-        t.position = new Vector3(ParallaxManager.GetRightEdge(), spawnEvent.YPosition + t.parent.position.y);
+        t.position = new Vector3(ParallaxManager.Instance.GetRightEdge(), spawnEvent.YPosition + t.parent.position.y);
     }
 
-    private void PopulateDictionaries()
-    {
-        _prefabs = new Dictionary<string, Transform>();
-        for (int i = 0; i < Prefabs.Length; i++)
-        {
-            _prefabs[Prefabs[i].ObjectName] = Prefabs[i].Prefab;
-        }
-    }
     
 }

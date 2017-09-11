@@ -29,10 +29,7 @@ public class TestMove : MonoBehaviour {
 
 	[SerializeField]
 	private Vector2 dir;
-
-	[SerializeField]
-	private ParallaxManager parallax;
-
+    
 	[SerializeField]
 	private float jumpForce;
 	[SerializeField]
@@ -83,7 +80,7 @@ public class TestMove : MonoBehaviour {
 		_state = PlayerState.Running;
 		rb2d.gravityScale = gravity;
 		col2d.isTrigger = false;
-		parallax.SetDrag (dragInAir);
+        ParallaxManager.Instance.SetDrag (dragInAir);
 	}
 
 	public void ApplyImpulseForce (Vector2 dir) {
@@ -135,7 +132,7 @@ public class TestMove : MonoBehaviour {
 				col2d.isTrigger = false;
 			} else if (_state == PlayerState.Breaching && rb2d.velocity.y <= 0f) {
 				ChangeState(PlayerState.Running);
-				parallax.SetDrag (dragInAir);
+                ParallaxManager.Instance.SetDrag (dragInAir);
 				col2d.isTrigger = false;
 			} 
 		}
@@ -144,7 +141,7 @@ public class TestMove : MonoBehaviour {
 			if (_state == PlayerState.Diving) {
 				ChangeState(PlayerState.Swimming);
 				rb2d.gravityScale = buoyancy;
-				parallax.SetDrag (dragInWater);
+                ParallaxManager.Instance.SetDrag (dragInWater);
 				swimStrokeTimer = 0f;
 			} else if (_state == PlayerState.Swimming && rb2d.velocity.y >= 0) {
 				Breach ();
@@ -172,7 +169,7 @@ public class TestMove : MonoBehaviour {
 	}
 
 	private void Run () {
-		parallax.IncSpeed (runSpeed * Time.deltaTime);
+        ParallaxManager.Instance.IncSpeed (runSpeed * Time.deltaTime);
 		rb2d.AddForce (Vector2.right * (dir.x + moveRightBias) * moveRightForce * Time.deltaTime, ForceMode2D.Force);
 	}
 
@@ -182,8 +179,8 @@ public class TestMove : MonoBehaviour {
 		    dir = new Vector2(Mathf.Cos(head.transform.eulerAngles.x*Mathf.Deg2Rad),
 		                      Mathf.Sin(head.transform.eulerAngles.x*Mathf.Deg2Rad));
            // dir.Normalize();
-		    rb2d.AddForce(dir * swimForce, ForceMode2D.Impulse); 
-			parallax.IncSpeed (swimSpeed);
+		    rb2d.AddForce(dir * swimForce, ForceMode2D.Impulse);
+            ParallaxManager.Instance.IncSpeed (swimSpeed);
 		} 
 	}
 

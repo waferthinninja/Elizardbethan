@@ -12,9 +12,30 @@ public class PatternEditorControl : Editor {
         DrawDefaultInspector();
 
         PatternEditor editor = (PatternEditor)target;
-        if (GUILayout.Button("Save Pattern"))
+        
+        if (GUILayout.Button("Select file"))
         {
-            editor.Save();
+            editor.SelectFile();
+        }
+        if (GUILayout.Button("Load From Specified FilePath"))
+        {
+            editor.LoadFromSpecifiedFilePath();
+        }
+        if (GUILayout.Button("Save To Specified FilePath"))
+        {
+            editor.SaveToSpecifiedFilePath();
+        }
+        if (GUILayout.Button("Save as New Easy Pattern"))
+        {
+            editor.SaveAsEasy();
+        }
+        if (GUILayout.Button("Save as New Medium Pattern"))
+        {
+            editor.SaveAsMedium();
+        }
+        if (GUILayout.Button("Save as New Hard Pattern"))
+        {
+            editor.SaveAsHard();
         }
     }
 }

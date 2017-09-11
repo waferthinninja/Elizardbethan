@@ -6,6 +6,7 @@ using System.Xml;
 using Assets.Scripts.Util;
 using System;
 
+[RequireComponent(typeof(PatternLoader))]
 public class LevelManager : MonoBehaviour
 {
     private static LevelManager instance;
@@ -22,22 +23,22 @@ public class LevelManager : MonoBehaviour
     private List<Pattern> EasyPatterns;
     private List<Pattern> MediumPatterns;
     private List<Pattern> HardPatterns;
-
-    public TextAsset patternDataFile;
-
+    
     public int PoolSize = 50; // prob want to make this large enough that the player is unlikely to ever need new levels
                             // note this is not really effectively pooling since we are going to "new" patterns etc even if we reuse the level
                             // but moot if getting to this sort of level is virtually impossible
     public Level[] LevelPool;
-    private int _levelIndex = 0;
+    //private int _levelIndex = 0;
+
+    private PatternLoader _patternLoader;
 
 	void Start () 
     {
-        XmlDocument xml = new XmlDocument();
-        xml.LoadXml(patternDataFile.text);
-        LoadPatternsFromXml(xml, "easy", ref EasyPatterns);
-        LoadPatternsFromXml(xml, "medium", ref MediumPatterns);
-        LoadPatternsFromXml(xml, "hard", ref HardPatterns);
+        _patternLoader = GetComponent<PatternLoader>();
+
+        LoadPatterns("easy", ref EasyPatterns);
+        LoadPatterns("medium", ref MediumPatterns);
+        LoadPatterns("hard", ref HardPatterns);
 
         Debug.Log(EasyPatterns.Count + " easy patterns loaded");
         Debug.Log(MediumPatterns.Count + " medium patterns loaded");
@@ -58,47 +59,28 @@ public class LevelManager : MonoBehaviour
 
     private void PopulateLevelPool()
     {
+
+        Debug.Log("Pregenerating " + PoolSize + " levels ");
         LevelPool = new Level[PoolSize];
         for (int i = 1; i <= PoolSize; i++)
         {
-            Debug.Log("Pregenerating level " + i);
             LevelPool[i-1] = GenerateLevel(i);
         }
     }
 
-    void LoadPatternsFromXml(XmlDocument xml, string sectionName, ref List<Pattern> list)
+    void LoadPatterns(string sectionName, ref List<Pattern> list)
     {
         list = new List<Pattern>();
-        var section = xml.SelectNodes(string.Format("//{0}/patterns/pattern", sectionName));
-        foreach (XmlNode patternNode in section)
+
+        string[] files = Directory.GetFiles("Assets/Data/Patterns/" + sectionName);
+
+        foreach (string file in files)
         {
-            Pattern pattern = new Pattern();
-
-            pattern.Length = float.Parse( patternNode.SelectSingleNode("length").InnerText);
-
-            var spawnEvents = new List<SpawnEvent>();
-            var spawns = patternNode.SelectNodes("spawn");
-            foreach (XmlNode spawnNode in spawns)
-            {
-                SpawnEvent spawn = new SpawnEvent(float.Parse(spawnNode.SelectSingleNode("distance").InnerText),
-                    spawnNode.SelectSingleNode("object").InnerText,
-                    float.Parse(spawnNode.SelectSingleNode("ypos").InnerText),
-                    spawnNode.SelectSingleNode("parent").InnerText);
-                spawnEvents.Add(spawn);
-            }
-
-            // sort the list before applying to the pattern as a queue 
-            spawnEvents.Sort(CompareByDistance);
-            pattern.SpawnEvents = new Queue<SpawnEvent>(spawnEvents);
-
-            list.Add(pattern);
-        }
+            if (file.EndsWith(".xml"))
+                list.Add(_patternLoader.LoadPatternFromFile(file));
+        }        
     }
-	
-    private static int CompareByDistance(SpawnEvent e1, SpawnEvent e2)
-    {
-        return e1.Distance.CompareTo(e2.Distance);
-    }
+
 
 	public Level GenerateLevel(int levelNumber)
     {

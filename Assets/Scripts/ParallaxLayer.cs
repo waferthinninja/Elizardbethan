@@ -19,12 +19,9 @@ public class ParallaxLayer : MonoBehaviour {
 	private int layerUnitSize;
 	private float tileSize;
 	private int numTiles;
-
-	private ParallaxManager mgr;
-
+    
 	public void SetUpLayer (float xSize) {
 		
-		mgr = GetComponentInParent<ParallaxManager> ();
 		parallaxFactor = transform.localScale.x;
 		layerUnitSize = (int)(xSize / parallaxFactor) + 1;
 		tileSize = tileSet.GetTileSize ();
@@ -59,7 +56,7 @@ public class ParallaxLayer : MonoBehaviour {
 		for (int i = 0; i < tiles.Length; i++) {
 			tiles [i].transform.Translate (Vector2.left * xMove * parallaxFactor);
 
-			if (tiles [i].transform.position.x < mgr.GetLeftEdge ()) {
+			if (tiles [i].transform.position.x < ParallaxManager.Instance.GetLeftEdge ()) {
 				tiles [i].transform.Translate (Vector2.right * numTiles * tileSize * parallaxFactor);
 				tiles [i].DespawnRespawn ();
 				//if (spawner != null) {
